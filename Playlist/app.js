@@ -78,3 +78,18 @@ document.addEventListener('DOMContentLoaded', function() {
   mainCenter.style.border = '2px solid black'; // Ajoute une bordure noire
 });
 
+function filterMedia(searchTerm) {
+  let filteredMedia = playlist.songs.filter(song => {
+    let lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return song.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+        (song.artist && song.artist.toLowerCase().includes(lowerCaseSearchTerm)) ||
+        (song.year && song.year.toString().includes(lowerCaseSearchTerm));
+  });
+
+  playlist.renderInElement(playlistElement, filteredMedia);
+}
+// Ajouter un écouteur d'événements pour la barre de recherche
+document.getElementById('searchBar').addEventListener('input', (e) => {
+  filterMedia(e.target.value);
+});
+

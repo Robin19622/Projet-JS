@@ -26,10 +26,13 @@ Playlist.prototype.next = function(){
   }
   this.play();
 };
-
-Playlist.prototype.renderInElement = function(list){
+Playlist.prototype.renderInElement = function(list, mediasToShow) {
   list.innerHTML = "";
-  for (let i = 0; i<this.songs.length; i++){
-    list.innerHTML += this.songs[i].toHTML();
+
+  // Utiliser 'mediasToShow' s'il est fourni, sinon utiliser 'this.songs'
+  let mediaList = mediasToShow || this.songs;
+
+  for (let i = 0; i < mediaList.length; i++) {
+    list.innerHTML += mediaList[i].toHTML();
   }
 };
